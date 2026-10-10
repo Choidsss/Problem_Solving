@@ -9,7 +9,6 @@ public class Solution
         List<int> list = new List<int>();
         Dictionary<int, int> dic = new Dictionary<int, int>();
         int answer = 0;
-        int index = 0;
 
         for (int i = 0; i < tangerine.Length; i++)
         {
@@ -23,24 +22,13 @@ public class Solution
             }
         }
 
-        foreach (KeyValuePair<int, int> pair in dic.OrderByDescending((x) => x.Value))
+        foreach (var pair in dic.OrderByDescending(x => x.Value))
         {
-            list.Add(pair.Key);
-        }
+            k -= pair.Value; 
+            answer++;        
 
-        while (true)
-        {
-            dic[list[index]]--;
-            k--;
-
-            if (k != 0 && dic[list[index]] == 0)
+            if (k <= 0)      
             {
-                index++;
-                answer++;
-            }
-            else if (k == 0)
-            {
-                answer++;
                 break;
             }
         }
